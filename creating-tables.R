@@ -26,3 +26,15 @@ customers_randomised <- sample(customer_ids, size=100, replace = TRUE)
 
 df_purchases <- data.frame(customer_id=customers_randomised, transaction_id=transaction_ids, amount=amounts)
 dbWriteTable(con, name="purchases", value=df_purchases)
+
+
+date_sold <- seq(as.Date("2023-01-01"), by=1, length.out=31)
+date_sold <- c(date_sold, date_sold)
+date_sold <- sort(date_sold)
+
+product <- rep(c("cakes", "pies"), times=31)
+
+amount_sold <- round(runif(62, 3, 20),2)
+
+df_cakepies <- data.frame(date_sold,product,amount_sold)
+dbWriteTable(con, name="desserts", value=df_cakepies)
